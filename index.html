@@ -16,15 +16,26 @@
 body { margin: 0; background: linear-gradient(180deg, #f0f4f8 0%, #ffffff 100%); color: #222; padding: 16px; font-size:15px; }
 h1 { font-size: 20px; margin:0; }
 .container { max-width:1100px; margin:0 auto; }
+
+/* === HEADER === */
 header { display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap; gap:8px;}
+.auth-area{display:flex; gap:8px; align-items:center; flex-wrap:wrap; justify-content:flex-end;}
 .card { background: var(--card); border-radius:16px; padding:16px; box-shadow:0 4px 16px rgba(0,0,0,0.08);}
+
+/* === TAB === */
 .tabs { display:flex; gap:8px; flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; margin-bottom:12px; }
 .tab { padding:8px 14px; border-radius:12px; background:var(--glass); cursor:pointer; color:var(--muted); transition: all 0.2s; flex:0 0 auto; white-space:nowrap;}
 .tab.active { background: linear-gradient(90deg, rgba(6,182,212,0.12), rgba(96,165,250,0.06)); color:#06b6d4; border:1px solid rgba(6,182,212,0.3);}
-.grid { display:grid; grid-template-columns:1fr 420px; gap:16px; }
+
+/* === GRID LAYOUT === */
+.grid { display:grid; grid-template-columns: 1fr 420px; gap:16px; }
 .panel { padding:16px; border-radius:16px; background:linear-gradient(180deg, rgba(255,255,255,0.95), rgba(245,245,245,0.9)); border:1px solid rgba(0,0,0,0.05); }
+
+/* === INPUT === */
 label { display:block; font-size:13px; color:var(--muted); margin-bottom:6px; }
 select, input[type=text], input[type=number] { width:100%; padding:10px; border-radius:10px; border:1px solid #ccc; background:#fff; color:inherit; }
+
+/* === DAFTAR SANTRI === */
 .santri-list { max-height:380px; overflow:auto; margin-top:10px; border-radius:10px; padding:8px; border:1px dashed rgba(0,0,0,0.1); background:#fafafa;}
 .santri-row { display:flex; gap:12px; align-items:center; padding:8px; border-radius:8px;}
 .santri-row:nth-child(odd){ background: rgba(0,0,0,0.02);}
@@ -32,39 +43,65 @@ select, input[type=text], input[type=number] { width:100%; padding:10px; border-
 .btn{display:inline-block; padding:10px 16px; border-radius:10px; cursor:pointer; border:none; background:var(--accent); color:#fff; font-weight:600; transition: all 0.2s;}
 .btn:hover{opacity:0.85;}
 .btn.ghost{background:transparent; border:1px solid #ccc; color:var(--muted); font-weight:500;}
-.small{padding:6px 10px; font-size:13px;}
-.transactions{margin-top:12px; overflow:auto;}
-table{width:100%; border-collapse:collapse;}
-th,td{padding:8px; text-align:left; border-bottom:1px solid rgba(0,0,0,0.05); font-size:13px;}
+
+/* === TABEL TRANSaksi === */ 
+.transactions{
+  margin-top:12px;
+  overflow-x:auto;
+  width:100%;
+  max-width:100%;
+}
+.transactions table{
+  width:100%;
+  border-collapse:collapse;
+}
+th,td{
+  padding:8px; text-align:left; border-bottom:1px solid rgba(0,0,0,0.05); font-size:13px;
+}
 th{color:var(--muted); font-weight:600;}
 .actions button{margin-right:6px;}
-.flex{display:flex; gap:8px; align-items:center; flex-wrap:wrap;}
 .footer-note{font-size:13px; color:var(--muted); margin-top:8px;}
-.list-editor{display:flex; gap:8px; margin-top:8px; flex-wrap:wrap;}
-.danger{background:#ff6b6b;color:#fff;}
-.auth-area{display:flex; gap:8px; align-items:center; flex-wrap:wrap; justify-content:flex-end;}
 
-/* RESPONSIVE HP */
+/* === RESPONSIVE HP: FULL WIDTH === */
 @media(max-width:900px){ 
-  .grid{grid-template-columns:1fr; gap:12px;}
-  .panel{margin-bottom:12px;}
+  .grid{
+    grid-template-columns:1fr !important;
+    gap:12px;
+  }
+  .panel{
+    width:100% !important;
+  }
 }
+
+/* === RESPONSIVE: MODE LIST DUPLIKASI DATA-LABEL === */
 @media(max-width:600px){
   body{padding:12px; font-size:14px;}
   h1{font-size:18px;}
   .tab{padding:6px 10px; font-size:12px;}
   .btn{padding:8px 12px; font-size:14px;}
-  input[type=text], input[type=number], select{padding:8px; font-size:14px;}
-  .santri-row{flex-direction:column; align-items:flex-start; gap:6px;}
-  .santri-row input{width:100%;}
   table{font-size:12px;}
-  .transactions table, .transactions table th, .transactions table td{
+
+  .transactions table, 
+  .transactions table th,
+  .transactions table td{
     display:block; width:100%;
   }
+
   .transactions table thead{display:none;}
-  .transactions table tr{margin-bottom:8px; border-bottom:1px solid rgba(0,0,0,0.1);}
-  .transactions table td{display:flex; justify-content:space-between; padding:6px 8px;}
-  .transactions table td::before{content:attr(data-label); font-weight:600; flex-basis:40%;}
+  .transactions table tr{
+    margin-bottom:8px; 
+    border-bottom:1px solid rgba(0,0,0,0.1);
+  }
+  .transactions table td{
+    display:flex; 
+    justify-content:space-between; 
+    padding:6px 8px;
+  }
+  .transactions table td::before{
+    content:attr(data-label);
+    font-weight:600;
+    flex-basis:40%;
+  }
 }
 </style>
 </head>
@@ -92,18 +129,27 @@ th{color:var(--muted); font-weight:600;}
 
     <div class="grid">
       <div class="panel" id="mainPanel"></div>
-      <div class="panel" style="min-width:280px; max-height:640px; overflow:auto">
+
+      <!-- ✅ PANEL TABEL FULL HP -->
+      <div class="panel" style="width:100%; max-width:100%; overflow:auto;">
         <h3 style="margin-top:0">Tabel Transaksi Nilai</h3>
         <div id="transactionsFilter"></div>
-        <div class="transactions card" id="transactionsPanel"></div>
+
+        <div class="transactions card" id="transactionsPanel" style="width:100%; max-width:100%; overflow-x:auto;"></div>
+
         <div class="footer-note">Data transaksi berisi semua nilai UH, PTS, PAS. Bisa edit/hapus. Disimpan di Firestore.</div>
       </div>
     </div>
   </div>
 
   <div style="height:18px"></div>
-  <div style="color:var(--muted);font-size:13px">Tips: Gunakan tab <strong>DAFTAR SANTRI</strong> dan <strong>DAFTAR MAPEL</strong> untuk meng-custom nama santri & mapel. Perubahan langsung mempengaruhi dropdown dan daftar di tab nilai.</div>
+  <div style="color:var(--muted);font-size:13px">
+    Tips: Gunakan tab <strong>DAFTAR SANTRI</strong> dan <strong>DAFTAR MAPEL</strong> untuk meng-custom nama santri & mapel. Perubahan langsung mempengaruhi dropdown dan daftar di tab nilai.
+  </div>
 </div>
+
+
+
 
 <script type="module">
 // === FIREBASE INIT ===
